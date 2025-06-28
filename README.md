@@ -46,7 +46,7 @@ cd Health-Ai-Assistant
 Install Required Python Packages
 pip install flask flask-cors 
 
-5. Run the Flask App
+ Run the Flask App
 
 python app.py
 
