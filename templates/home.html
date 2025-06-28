@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>HealthAI Assistant - Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #bbdefb, #e3f2fd);
+      text-align: center;
+    }
+
+    /* TOP CONTAINER - Oval shaped */
+    .top-container {
+      background: white;
+      border-bottom-left-radius: 120px;
+      border-bottom-right-radius: 120px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+      position: relative;
+      overflow: hidden;
+      border: 3px solid transparent;
+      background-clip: padding-box;
+    }
+
+    .top-container::before {
+      content: "";
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      z-index: -1;
+      background: linear-gradient(to right, #1976d2, #42a5f5);
+      border-bottom-left-radius: 120px;
+      border-bottom-right-radius: 120px;
+    }
+
+    /* NAVIGATION */
+    .top-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 25px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo {
+      width: 35px;
+      height: 35px;
+    }
+
+    .brand-name {
+      font-size: 22px;
+      font-weight: bold;
+      color: #1976d2;
+    }
+
+    .nav-right a {
+      text-decoration: none;
+      margin-left: 20px;
+      padding: 10px 20px;
+      background: #1976d2;
+      color: white;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .nav-right a:hover {
+      background: #1565c0;
+    }
+
+    /* HEADER SECTION */
+    header {
+      position: relative;
+      min-height: 65vh;
+      background: url('https://www.news-medical.net/images/Article_Images/ImageForArticle_24532_17066301121638048.jpg') no-repeat center center / cover;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1;
+    }
+
+    .header-content {
+      position: relative;
+      z-index: 2;
+      padding: 40px 20px;
+      max-width: 800px;
+    }
+
+    header h1 {
+      font-size: 40px;
+      margin-bottom: 10px;
+    }
+
+    header h2 {
+      font-size: 24px;
+      color: #bbdefb;
+      margin-bottom: 20px;
+    }
+
+    .cta-button {
+      padding: 12px 24px;
+      font-size: 16px;
+      background-color: #ffffff;
+      color: #1976d2;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s ease;
+    }
+
+    .cta-button:hover {
+      background-color: #e3f2fd;
+    }
+
+    .section-title {
+      margin-top: 60px;
+      margin-bottom: 30px;
+      font-size: 32px;
+      color: #1976d2;
+      text-shadow: 1px 1px #fff;
+    }
+
+    /* FEATURE CARDS */
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 20px;
+    }
+
+    .card {
+      background-color: white;
+      padding: 40px;
+      border-radius: 20px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      width: 300px;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-icon {
+      font-size: 50px;
+      margin-bottom: 15px;
+      color: #1976d2;
+      transition: transform 0.3s;
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.2);
+    }
+
+    .card-title {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    /* HOW IT WORKS SECTION */
+    .divider {
+      margin: 60px auto 30px;
+      width: 80%;
+      border-bottom: 2px dashed #1976d2;
+    }
+
+    .how-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      padding: 30px;
+    }
+
+    .how-card {
+      background-color: white;
+      width: 320px;
+      padding: 35px;
+      border-radius: 20px;
+      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      text-align: center;
+    }
+
+    .how-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .how-icon {
+      font-size: 50px;
+      color: #1e88e5;
+      margin-bottom: 10px;
+    }
+
+    .how-step {
+      font-size: 17px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 5px;
+    }
+
+    .how-desc {
+      font-size: 15px;
+      color: #555;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      font-size: 14px;
+      color: #333;
+      background: #e3f2fd;
+    }
+
+    @media (max-width: 768px) {
+      .container, .how-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .top-nav {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .nav-right a {
+        margin: 5px 0;
+      }
+
+      header {
+        min-height: 70vh;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP SECTION with Oval Shape -->
+  <div class="top-container">
+    <nav class="top-nav">
+      <div class="nav-left">
+        <img src="https://cdn-icons-png.flaticon.com/128/12969/12969486.png" alt="HealAI Logo" class="logo">
+        <span class="brand-name">HealAI</span>
+      </div>
+      <div class="nav-right">
+        <a href="#features">Features</a>
+        <a href="#how">How it Works</a>
+      </div>
+    </nav>
+
+    <header>
+      <div class="header-overlay"></div>
+      <div class="header-content">
+        <h1>Welcome to HealAI</h1>
+        <h2>Your Smart Healthcare Companion</h2>
+        <button class="cta-button" onclick="document.getElementById('features').scrollIntoView()">Explore Features</button>
+      </div>
+    </header>
+  </div>
+
+  <!-- FEATURES -->
+  <h2 class="section-title" id="features">✨ Features ✨</h2>
+  <div class="container">
+    <div class="card" onclick="navigate('/symptom-checker')">
+      <div class="card-icon">🩺</div>
+      <div class="card-title">Symptom Checker</div>
+    </div>
+    <div class="card" onclick="navigate('/chatbot')">
+      <div class="card-icon">🤖</div>
+      <div class="card-title">Health Chatbot</div>
+    </div>
+    <div class="card" onclick="navigate('/treatment')">
+      <div class="card-icon">💊</div>
+      <div class="card-title">Treatment Plan</div>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="divider" id="how"></div>
+  <h2 class="section-title">🛠️ How the Website Works</h2>
+  <div class="how-container">
+    <div class="how-card reveal">
+      <div class="how-icon">📱</div>
+      <div class="how-step">Access the App</div>
+      <div class="how-desc">Open HealAI from any device — no install required!</div>
+    </div>
+
+    <div class="how-card reveal">
+      <div class="how-icon">📝</div>
+      <div class="how-step">Describe Symptoms</div>
+      <div class="how-desc">Type your symptoms or health questions in natural language.</div>
+    </div>
+
+    <div class="how-card reveal">
+      <div class="how-icon">⚙️</div>
+      <div class="how-step">AI Processes Info</div>
+      <div class="how-desc">Our model interprets your input using medical datasets.</div>
+    </div>
+
+    <div class="how-card reveal">
+      <div class="how-icon">📊</div>
+      <div class="how-step">Get Recommendations</div>
+      <div class="how-desc">Receive advice, treatment steps, and when to consult a doctor.</div>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 HealthAI Assistant — Powered by IBM watsonx & IBM granite Model💙
+  </footer>
+
+  <script>
+    function navigate(path) {
+      window.location.href = path;
+    }
+  </script>
+</body>
+</html>

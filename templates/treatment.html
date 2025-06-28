@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Treatment Plan</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #fce4ec);
+      padding: 40px;
+      max-width: 700px;
+      margin: auto;
+      text-align: center;
+    }
+
+    h2 {
+      font-size: 28px;
+      color: #1565c0;
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
+      border: 2px solid #90caf9;
+      border-radius: 10px;
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus {
+      border-color: #1565c0;
+      outline: none;
+    }
+
+    button {
+      width: 45%;
+      padding: 12px ;
+      font-size: 18px;
+      background-color: #1565c0;
+      color: white;
+      border: none;
+      border-radius: 16px;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #0d47a1;
+      transform: scale(1.03);
+    }
+
+    #plan {
+      margin-top: 30px;
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      font-size: 16px;
+      color: #333;
+      line-height: 1.6;
+      opacity: 0;
+      transition: opacity 0.4s ease-in;
+      position: relative;
+    }
+
+    #plan.visible {
+      opacity: 1;
+    }
+
+    #plan ul {
+      text-align: left;
+      padding-left: 25px;
+      list-style-type: '✅ ';
+    }
+
+    #plan li {
+      margin-bottom: 12px;
+      transition: transform 0.3s;
+    }
+
+    #plan li:hover {
+      transform: translateX(5px);
+      color: #0d47a1;
+    }
+
+    .copy-btn {
+      background: #f5f5f5;
+      color: #1565c0;
+      border: 1px solid #ccc;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 15px;
+    }
+
+    .copy-btn:hover {
+      background: #e3f2fd;
+    }
+
+    .plan-title {
+      font-weight: bold;
+      font-size: 18px;
+      margin-bottom: 15px;
+      color: #1565c0;
+    }
+
+    .note {
+      font-size: 14px;
+      color: #777;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h2>💊 Get a Treatment Plan</h2>
+  <input id="disease" placeholder="Enter a disease (e.g., Diabetes)" />
+  <button onclick="getPlan()">Generate Plan</button>
+
+  <div id="plan"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      window.getPlan = async function () {
+        const disease = document.getElementById("disease").value.trim();
+        const planBox = document.getElementById("plan");
+
+        if (!disease) {
+          planBox.innerHTML = "<span style='color:red;'>⚠️ Please enter a disease name.</span>";
+          planBox.classList.add("visible");
+          return;
+        }
+
+        planBox.innerHTML = "🔄 Generating treatment plan...";
+        planBox.classList.add("visible");
+        planBox.style.color = "#555";
+
+        try {
+          const res = await fetch("/api/treatment", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ disease })
+          });
+
+          const data = await res.json();
+
+          const steps = data.plan
+            .split(/\.\s+|\n+/)
+            .filter(Boolean)
+            .map(step => `<li>${step.trim().replace(/^•\s*/, '')}</li>`)
+            .join('');
+
+          planBox.style.color = "#333";
+          planBox.innerHTML = `
+            <div class="plan-title">📝 Recommended Plan for <strong>${disease}</strong>:</div>
+            <ul>${steps}</ul>
+            <button class="copy-btn" onclick="copyPlan()">📋 Copy Plan</button>
+            <div class="note">💡 This plan is AI-generated and should be reviewed by a healthcare provider.</div>
+          `;
+        } catch (err) {
+          planBox.innerHTML = "<span style='color:red;'>❌ Unable to fetch treatment plan.</span>";
+        }
+      };
+
+      window.copyPlan = function () {
+        const planText = document.querySelector("#plan ul").innerText;
+        navigator.clipboard.writeText(planText).then(() => {
+          alert("📋 Plan copied to clipboard!");
+        });
+      };
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI Symptom Checker</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: url('https://cdn.pixabay.com/photo/2020/10/27/13/44/health-5692089_1280.jpg') no-repeat center center/cover;
+
+      padding: 30px 16px;
+      max-width: 700px;
+      margin: auto;
+      text-align: center;
+      color: #333;
+    }
+
+    h2 {
+      font-size: 30px;
+      color: #1976d2;
+      margin-bottom: 5px;
+    }
+
+    p.subtitle {
+      font-size: 16px;
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 12px;
+      font-size: 16px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      resize: vertical;
+    }
+
+    button {
+      width: 40%;
+      padding: 12px;
+      font-size: 18px;
+      background-color: #1976d2;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      margin-top: 12px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    button:hover {
+      background-color: #1565c0;
+      transform: scale(1.02);
+    }
+
+    .examples {
+      margin-top: 18px;
+      font-size: 15px;
+      color: #444;
+    }
+
+    .examples span {
+      background: #e3f2fd;
+      padding: 6px 12px;
+      margin: 6px;
+      display: inline-block;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .examples span:hover {
+      background: #bbdefb;
+    }
+
+    .tips {
+      background: #fff3e0;
+      padding: 10px 16px;
+      margin-top: 20px;
+      border-left: 4px solid #ff9800;
+      border-radius: 8px;
+      text-align: left;
+      font-size: 14px;
+    }
+
+    #result {
+      margin-top: 25px;
+      font-size: 20px;
+      font-weight: 500;
+      color: #1a237e;
+      opacity: 0;
+      transition: opacity 0.5s;
+    }
+
+    #result.visible {
+      opacity: 1;
+    }
+
+    details {
+      margin-top: 25px;
+      background: #e8f5e9;
+      padding: 10px 15px;
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    summary {
+      font-weight: bold;
+      cursor: pointer;
+      color: #388e3c;
+    }
+
+    .toast {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #ffe0b2;
+      color: #d84315;
+      padding: 10px 16px;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: opacity 0.4s ease, transform 0.3s ease;
+      z-index: 999;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateY(5px);
+    }
+
+  </style>
+</head>
+<body>
+
+  <h2>🩺 Symptom Checker</h2>
+  <p class="subtitle">Enter your symptoms and let our AI suggest possible causes.</p>
+
+  <textarea id="symptoms" placeholder="e.g. fever, nausea, fatigue..."></textarea>
+  <button onclick="checkSymptoms()">Check Possible Disease</button>
+
+  <div class="examples">
+    <p><strong>Try:</strong> <span onclick="insertExample('fever, headache')">fever, headache</span> <span onclick="insertExample('nausea, dizziness')">nausea, dizziness</span> <span onclick="insertExample('chest pain, fatigue')">chest pain, fatigue</span></p>
+  </div>
+
+  <div class="tips">
+    💡 <strong>Tip:</strong> Describe symptoms in detail and separate them with commas. For example: <em>sharp chest pain, fatigue, shortness of breath</em>.
+  </div>
+
+  <div id="result"></div>
+
+  <details>
+    <summary>ℹ️ How it Works</summary>
+    <p>This tool uses AI to analyze your symptom description and match it with common medical conditions based on language patterns. It is not a substitute for a professional diagnosis.</p>
+  </details>
+
+  <div class="toast" id="toast"></div>
+
+  <script>
+    function insertExample(text) {
+      document.getElementById("symptoms").value = text;
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 3000);
+    }
+
+    async function checkSymptoms() {
+      const symptoms = document.getElementById("symptoms").value.trim();
+      const resultDiv = document.getElementById("result");
+
+      if (!symptoms) {
+        showToast("⚠️ Please enter your symptoms.");
+        resultDiv.classList.remove("visible");
+        return;
+      }
+
+      resultDiv.textContent = "⏳ Analyzing your symptoms...";
+      resultDiv.style.color = "#555";
+      resultDiv.classList.add("visible");
+
+      try {
+        const res = await fetch("/api/predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ symptoms })
+        });
+
+        const data = await res.json();
+        resultDiv.textContent = "🧠 AI Prediction: " + data.prediction;
+        resultDiv.style.color = "#1a237e";
+      } catch (err) {
+        resultDiv.textContent = "❌ Server error. Please try again.";
+        resultDiv.style.color = "red";
+      }
+    }
+  </script>
+
+</body>
+</html>
