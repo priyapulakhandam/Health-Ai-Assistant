@@ -1,8 +1,5 @@
 # Health-Ai-Assistant
 
-===============================================
-   HealthAI Assistant – AI-Powered Healthcare
-===============================================
 
 HealthAI Assistant is a web-based healthcare tool powered by IBM's Granite LLM. It helps users check symptoms, ask health-related questions, and get personalized treatment plans — all through a modern and easy-to-use interface.
 
