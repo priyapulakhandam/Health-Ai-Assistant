@@ -1,52 +1,98 @@
 # Health-Ai-Assistant
 
-📌 Project Title: HealthAI Assistant – Your AI-Powered Healthcare Companion
+===============================================
+   HealthAI Assistant – AI-Powered Healthcare
+===============================================
 
-🧠 Project Overview: HealthAI Assistant is a web-based application that allows users to:
+HealthAI Assistant is a web-based healthcare tool powered by IBM's Granite LLM. It helps users check symptoms, ask health-related questions, and get personalized treatment plans — all through a modern and easy-to-use interface.
 
-Check symptoms and get AI-predicted conditions
+-----------------------------------------------
+🔹 Key Features
+-----------------------------------------------
 
-Chat with an AI-powered health assistant
+1. Symptom Checker
+   - Enter symptoms like "fever", "cough", or "headache"
+   - Get possible health conditions predicted by AI
 
-Generate personalized treatment plans
+2. AI Health Chatbot
+   - Ask natural questions like:
+     "Can anxiety cause chest pain?"
+   - Get real-time responses using IBM Granite LLM
 
-It uses IBM’s Granite LLM to provide intelligent, real-time medical suggestions.
+3. Treatment Plan Generator
+   - Enter a disease name (e.g., Diabetes)
+   - Receive a structured and personalized treatment plan
 
-🌟 Features: Symptom Checker Users can enter symptoms like fever, cough, headache and receive possible condition predictions.
+4. Copy to Clipboard
+   - Easily copy treatment plans with a click
 
-Health Chatbot A conversational AI assistant that responds to user health queries like “Can anxiety cause chest pain?”
+5. Modern UI Design
+   - Responsive layout for mobile and desktop
+   - Animated backgrounds, parallax effects, and interactive particles
 
-Treatment Plan Generator Given a disease name (e.g., Diabetes), the app generates a structured, AI-powered treatment plan.
+-----------------------------------------------
+🔧 Technology Stack
+-----------------------------------------------
 
-Copy to Clipboard Button Allows users to easily copy and save treatment plans.
+- Frontend: HTML, CSS, JavaScript
+- Backend: Python Flask
+- AI Model: IBM Granite LLM (via API)
+- UI Tools: Particle effects, wave dividers, tooltips
+- Deployment: Localhost, ZIP archive, or online hosting
 
-Modern UI Design Includes animated backgrounds, parallax effects, and a fully responsive layout.
+-----------------------------------------------
+⚙️ Setup & Installation
+-----------------------------------------------
 
-💻 Technology Stack: FrontenHTML, CSS, JavaScript
+Step 1: Install Git
+- Download from https://git-scm.com and install it.
 
-Backend: Python Flask
+Step 2: Clone the Repository
+- Open Terminal / Command Prompt and run:
 
-AI Model: IBM Granite (via API)
+    git clone https://github.com/priyapulakhandam/Health-Ai-Assistant
 
-UI Tools: Wave dividers, particles, tooltips, and responsive design
+Step 3: Navigate to the Project Folder
 
-Deployment: Localhost or as a ZIP (can also be hosted online)
+    cd Health-Ai-Assistant
 
-🔧 Setup & Installation (for HealthAI Assistant) ✅ Step-by-Step Guide
+Step 4: Install Python Packages
 
-Install Git (if not already installed) Download and install Git from https://git-scm.com.
+    pip install flask flask-cors
 
-Open Terminal / Command Prompt / Git Bash Then run the following command to clone your repo:
+Step 5: Run the App
 
-git clone  https://github.com/priyapulakhandam/Health-Ai-Assistant
+    python app.py
 
-Go into the Project Directory
-cd Health-Ai-Assistant
+Step 6: Open in Browser
+- Visit: http://localhost:5000
 
-Install Required Python Packages
-pip install flask flask-cors 
+The HealthAI Assistant is now running locally on your machine.
 
- Run the Flask App
+-----------------------------------------------
+📦 Deployment Options
+-----------------------------------------------
+
+- Run on localhost for development or testing
+- Export project as a ZIP file for sharing
+- Host frontend on GitHub Pages / Vercel
+- Host backend on PythonAnywhere / Render / Railway
+
+-----------------------------------------------
+📢 Disclaimer
+-----------------------------------------------
+
+HealthAI Assistant is an informational tool. It does NOT provide real medical diagnoses or treatments. Always consult a qualified healthcare provider for serious health concerns.
+
+-----------------------------------------------
+👩‍💻 Developer Info
+-----------------------------------------------
+
+Created by: Priya Pulakhandam  
+GitHub: https://github.com/priyapulakhandam
+
+-----------------------------------------------
+
 
 python app.py
 
