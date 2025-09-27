@@ -42,9 +42,11 @@ HealthAI Assistant is a web-based healthcare tool powered by IBM's Granite LLM. 
 -----------------------------------------------
 
 Step 1: Install Git
+
 - Download from https://git-scm.com and install it.
 
 Step 2: Clone the Repository
+
 - Open Terminal / Command Prompt and run:
 
     git clone https://github.com/priyapulakhandam/Health-Ai-Assistant
@@ -86,6 +88,7 @@ HealthAI Assistant is an informational tool. It does NOT provide real medical di
 -----------------------------------------------
 
 Created by: Priya Pulakhandam  
+
 GitHub: https://github.com/priyapulakhandam
 
 -----------------------------------------------
